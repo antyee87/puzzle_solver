@@ -140,30 +140,27 @@ class NPuzzleSolver {
 
         var inversions = 0
         var step = 1
+        val newFlatList = MutableList(flatList.size) {0}
         while (step < flatList.size) {
-            val newFlatList = mutableListOf<Int>()
             var l = 0
+            var i = 0
             while (l < flatList.size) {
                 val m = l + step
                 var r = m
                 while (l < m && l < flatList.size && r < m + step && r < flatList.size) {
                     if (flatList[l] <= flatList[r]) {
-                        newFlatList.add(flatList[l])
-                        l++
+                        newFlatList[i++] = flatList[l++]
                     }
                     else {
-                        newFlatList.add(flatList[r])
-                        r++
+                        newFlatList[i++] = flatList[r++]
                         inversions += m - l
                     }
                 }
                 while (l < m && l < flatList.size) {
-                    newFlatList.add(flatList[l])
-                    l++
+                    newFlatList[i++] = flatList[l++]
                 }
                 while (r < m + step && r < flatList.size) {
-                    newFlatList.add(flatList[r])
-                    r++
+                    newFlatList[i++] = flatList[r++]
                 }
                 l = m + step
             }
